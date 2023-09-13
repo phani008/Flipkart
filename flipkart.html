@@ -1,0 +1,176 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="flipkart.css">
+    <title>Product view</title>
+
+
+    <script>
+        function imageZoom(imgID, resultID) {
+          var img, lens, result, cx, cy;
+          img = document.getElementById(imgID);
+          result = document.getElementById(resultID);
+          /*create lens:*/
+          lens = document.createElement("DIV");
+          lens.setAttribute("class", "img-zoom-lens");
+          /*insert lens:*/
+          img.parentElement.insertBefore(lens, img);
+          /*calculate the ratio between result DIV and lens:*/
+          cx = result.offsetWidth / lens.offsetWidth;
+          cy = result.offsetHeight / lens.offsetHeight;
+          /*set background properties for the result DIV:*/
+          result.style.backgroundImage = "url('" + img.src + "')";
+          result.style.backgroundSize = (img.width * cx) + "px " + (img.height * cy) + "px";
+          /*execute a function when someone moves the cursor over the image, or the lens:*/
+          lens.addEventListener("mousemove", moveLens);
+          img.addEventListener("mousemove", moveLens);
+          /*and also for touch screens:*/
+          lens.addEventListener("touchmove", moveLens);
+          img.addEventListener("touchmove", moveLens);
+          function moveLens(e) {
+            var pos, x, y;
+            /*prevent any other actions that may occur when moving over the image:*/
+            e.preventDefault();
+            /*get the cursor's x and y positions:*/
+            pos = getCursorPos(e);
+            /*calculate the position of the lens:*/
+            x = pos.x - (lens.offsetWidth / 2);
+            y = pos.y - (lens.offsetHeight / 2);
+            /*prevent the lens from being positioned outside the image:*/
+            if (x > img.width - lens.offsetWidth) {x = img.width - lens.offsetWidth;}
+            if (x < 0) {x = 0;}
+            if (y > img.height - lens.offsetHeight) {y = img.height - lens.offsetHeight;}
+            if (y < 0) {y = 0;}
+            /*set the position of the lens:*/
+            lens.style.left = x + "px";
+            lens.style.top = y + "px";
+            /*display what the lens "sees":*/
+            result.style.backgroundPosition = "-" + (x * cx) + "px -" + (y * cy) + "px";
+          }
+          function getCursorPos(e) {
+            var a, x = 0, y = 0;
+            e = e || window.event;
+            /*get the x and y positions of the image:*/
+            a = img.getBoundingClientRect();
+            /*calculate the cursor's x and y coordinates, relative to the image:*/
+            x = e.pageX - a.left;
+            y = e.pageY - a.top;
+            /*consider any page scrolling:*/
+            x = x - window.pageXOffset;
+            y = y - window.pageYOffset;
+            return {x : x, y : y};
+          }
+        }
+        </script>
+</head>
+<body>
+    <div class="main-container">
+        <div class="first-navbar">
+            <div class="icon">
+                <img src="">
+            </div>
+            <div class="search-box">
+                <input type="text" placeholder="Search for products brands and more" spellcheck="false">
+                <button><img src=""></button>
+            </div>
+            <div class="login">
+                <button>Login</button>
+            </div>
+            <div class="become-a-seller">
+                Become a Seller
+            </div>
+            <div class="more">
+                More
+                <img src="">
+            </div>
+            <div class="cart">
+                <img src="">
+                Cart
+            </div>
+        </div>
+        <div class="second-navbar">
+            <div>
+                Electronics
+                <img src="">
+            </div>
+            <div>
+                TVs & Appliances
+                <img src="">
+            </div>
+            <div>
+                Men 
+                <img src="">
+            </div>
+            <div>
+                Women 
+                <img src="">
+            </div>
+            <div>
+                Baby & Kids 
+                <img src="">
+            </div>
+            <div>
+                Home & Furniture 
+                <img src="">
+            </div>
+            <div>
+                Sports,Books & More
+                <img src="">
+            </div>
+            <div>
+                Flights 
+            </div>
+            <div>
+                Offer Zone
+            </div>
+        </div>
+        <div class="body-container">
+                <div class="left-body">
+                    <div class="top">
+                        <div class="top-left">
+                            <div class="abc"><img src="https://rukminim2.flixcart.com/image/128/128/xif0q/printer/r/5/g/-original-imagnuwerspazeeh.jpeg?q=70"></div>
+                            <div class="abc"><img src="https://rukminim2.flixcart.com/image/128/128/xif0q/printer/3/a/c/-original-imagnuwe9vkzpmbz.jpeg?q=70"></div>
+                            <div class="abc"><img src="https://rukminim2.flixcart.com/image/128/128/xif0q/printer/l/5/m/-original-imagnuwegvgsmmhm.jpeg?q=70"></div>
+                            <div class="abc"><img src="https://rukminim2.flixcart.com/image/128/128/xif0q/printer/y/f/j/-original-imagksykbzzdjxem.jpeg?q=70"></div>
+                            <div class="abc"><img src="https://rukminim2.flixcart.com/image/128/128/xif0q/printer/a/b/r/-original-imagnuwezym4esnz.jpeg?q=70"></div>
+                            <div><img src=""></div>
+                        </div>
+                        <div class="top-right" >
+                            <img src="https://rukminim2.flixcart.com/image/416/416/xif0q/printer/d/f/k/-original-imagksykbxfggw2h.jpeg?q=70" id="myimage">
+                        </div>
+                    </div>
+                    <div class="bottom">
+                        <button class="button" style="background-color: orange;">
+                            ADD TO CART
+                        </button>
+                        <button class="button" style="background-color: orangered;">
+                            BUY NOW
+                        </button>
+                    </div>
+                </div>
+                <div class="right-body" id="myresult">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratione impedit, quas minus quis!
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt aut nisi porro? Atque deserunt at iusto, fuga illo vitae ut cumque reiciendis explicabo voluptatum doloribus ratio
+                </div>
+        </div>
+    </div>
+    <script>
+        // Initiate zoom effect:
+        imageZoom("myimage", "myresult");
+        </script>
+</body>
+
+</html>
